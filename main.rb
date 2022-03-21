@@ -3,6 +3,22 @@ require "sinatra"
 
 set :bind, "0.0.0.0"
 
+# When using with iOS Shortcuts, we have to disable showing exceptions
+# and set custom errors with the error code, so they can be parsed.
+# iOS Shortcuts do not allow you to get the HTTP status (as of iOS 15.3.1)
+#
+# These error pages can be customized further, as long as they have "500"
+# and "404" in them respectively
+disable :show_exceptions
+
+error do
+  "500"
+end
+
+error 404 do
+  "404"
+end
+
 post "/add_taken" do
   meds_sheet.add_taken
 end
