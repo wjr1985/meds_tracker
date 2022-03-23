@@ -39,7 +39,7 @@ module GoogleSheets
       # nil if not found
       index = date_values.find_index { |dv| dv.first == current_time.strftime("%F") }
       if index.nil?
-        previous_index = date_values.find_index { |dv| dv.first == (current_time - 1.day).strftime("%F") }
+        previous_index = date_values.find_index { |dv| dv.first == (current_time - 1.day).strftime("%F") } || -1
         index = add_date(previous_index, current_date)
       end
 
