@@ -1,6 +1,8 @@
+require "webrick"
+
 module GoogleSheets
   class Authorization
-    OOB_URI = "urn:ietf:wg:oauth:2.0:oob".freeze
+    OAUTH_URI = "http://localhost:5151/".freeze
     SCOPE = Google::Apis::SheetsV4::AUTH_SPREADSHEETS
 
     def self.credentials(force: false)
@@ -15,12 +17,20 @@ module GoogleSheets
 
     def self.authorize
       if credentials(force: true).nil?
-        url = authorizer.get_authorization_url(base_url: OOB_URI)
-        puts "Open the following URL in the browser and enter the " \
-            "resulting code after authorization:\n" + url
-        code = gets
+        url = authorizer.get_authorization_url(base_url: OAUTH_URI)
+        puts "Open the following URL in the browser:\n#{url}"
+        puts "\n"
+        puts "Webrick will start to listen for the oauth response"
+        puts "If you're running this on a remote machine, port forward 5151 to your local machine"
+        server = WEBrick::HTTPServer.new(:Port => 5151)
+
+        server.mount('', AuthorizeResponse)
+        trap('INT') {server.shutdown}
+        server.start
+
+
         authorizer.get_and_store_credentials_from_code(
-          user_id: user_id, code: code, base_url: OOB_URI
+          user_id: user_id, code: AuthorizeResponse.auth_code, base_url: OAUTH_URI
         )
       else
         puts "Already authorized"
