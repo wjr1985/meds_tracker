@@ -40,23 +40,23 @@ module MedsTracker
         # nil if not found
         index = date_values.find_index { |dv| dv.first == current_time.strftime("%F") }
         if index.nil?
-          previous_index = date_values.find_index { |dv| dv.first == (current_time - 1.day).strftime("%F") } || -1
-          index = add_date(previous_index, current_date)
+          location = date_values.length + 1
+          add_date(location, current_date)
+        else
+          index + 1
         end
-
-        index + 1
       end
 
       def get_values(range)
         service.get_spreadsheet_values(sheet_id, range).values
       end
 
-      def add_date(previous_index, date)
-        range = "A#{previous_index + 2}"
+      def add_date(location, date)
+        range = "A#{location}"
         result = add_value_to_sheet(range, date)
         raise "Updated too many or not enough cells: #{result.updated_cells}" if result.updated_cells != 1
 
-        previous_index + 1
+        location
       end
 
       def add_time(row, type)
