@@ -75,7 +75,7 @@ These are in no specific order
 - [x] Publish iOS Shortcuts
 - [ ] Handle when taken, start, or end crosses a date boundary (a.k.a. don't assume that all meds are taken, start, and end on the same day)
 - [ ] Allow customization of the columns used for date, taken, start, end, and duration
-- [ ] Code cleanup around indexes
+- [x] Code cleanup around indexes
 - [ ] User interface so that this doesn't rely only on iOS / macOS Shortcuts or a separate application calling it
 - [ ] Handle if unable to port forward 5151 to your local machine during authorization
 
