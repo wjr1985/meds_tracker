@@ -2,6 +2,10 @@
 
 This is a simple program that responds to HTTP requests by updating a Google Spreadsheet. It's primary purpose is to help track when medication is taken, when the effects of the medication start, and when they end, and is designed to fit into a spreadsheet designed with 5 columns - date, taken time, start time, end time, and a column for a difference between end time and start time (duration).
 
+## ⚠️ Work in progress
+
+This is very much so a work in progress. It works for me for my daily use, but could have some bugs still. Support for running in Docker is still coming.
+
 ## Prerequisites
 
 - Ruby 3.1.1
