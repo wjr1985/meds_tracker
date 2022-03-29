@@ -1,4 +1,4 @@
-# meds_tracker_google_sheets
+# meds_tracker
 
 This is a simple program that responds to HTTP requests by updating a Google Spreadsheet. It's primary purpose is to help track when medication is taken, when the effects of the medication start, and when they end, and is designed to fit into a spreadsheet designed with 5 columns - date, taken time, start time, end time, and a column for a difference between end time and start time (duration).
 
@@ -38,7 +38,7 @@ For running locally: `bundle exec ruby authorize.rb`
 
 This will generate a link for you to click on, and then will start Webrick to listen to the OAuth response. Unfortunately, the OAuth out-of-band (OOB) flow has been removed by Google (more information [here](https://developers.googleblog.com/2022/02/making-oauth-flows-safer.html#disallowed-oob)), so the old method of copy-pasting the OAuth code no longer works.
 
-Once the authorization code receives the callback, it will automatically get the code from the request, and complete authorization. If you're not running this on the same machine that you opened the browser on, you'll want to port forward `5151` to your local machine from whatever machine that `meds_tracker_google_sheets` is running on.
+Once the authorization code receives the callback, it will automatically get the code from the request, and complete authorization. If you're not running this on the same machine that you opened the browser on, you'll want to port forward `5151` to your local machine from whatever machine that `meds_tracker` is running on.
 
 ## Starting
 
@@ -66,16 +66,16 @@ When `/add_end` is called, it will automatically add values in the `duration` co
 These are in no specific order
 
 - [ ] Finish Docker setup
-- [ ] Publish iOS Shortcuts
+- [x] Publish iOS Shortcuts
 - [ ] Handle when taken, start, or end crosses a date boundary (a.k.a. don't assume that all meds are taken, start, and end on the same day)
 - [ ] Allow customization of the columns used for date, taken, start, end, and duration
 - [ ] Code cleanup around indexes
-- [ ] User interface so that this doesn't rely only on iOS Shortcuts or a separate application calling it
+- [ ] User interface so that this doesn't rely only on iOS / macOS Shortcuts or a separate application calling it
 - [ ] Handle if unable to port forward 5151 to your local machine during authorization
 
 ## Contributing
 
-Want to contribute? Feel free to create a merge request [here](https://gitlab.com/wjr1985/meds_tracker_google_sheets/-/merge_requests), or report an issue [here](https://gitlab.com/wjr1985/meds_tracker_google_sheets/-/issues). If you contribute a merge request, you'll be listed in the README.
+Want to contribute? Feel free to create a merge request [here](https://gitlab.com/wjr1985/meds_tracker/-/merge_requests), or report an issue [here](https://gitlab.com/wjr1985/meds_tracker/-/issues). If you contribute a merge request, you'll be listed in the README.
 
 ## License
 

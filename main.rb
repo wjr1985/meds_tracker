@@ -1,4 +1,4 @@
-require_relative "lib/meds_tracker_google_sheets"
+require_relative "lib/meds_tracker"
 require "sinatra"
 
 set :bind, "0.0.0.0"
@@ -32,7 +32,7 @@ post "/add_end" do
 end
 
 def meds_sheet
-  @meds_sheet ||= GoogleSheets::Sheet.new(
+  @meds_sheet ||= MedsTracker::GoogleSheets::Sheet.new(
     sheet_id: ENV["SHEET_ID"]
   )
 end

@@ -1,6 +1,6 @@
 require "dotenv"
 Dotenv.load
 
-require_relative "lib/meds_tracker_google_sheets"
+require_relative "lib/meds_tracker"
 
-GoogleSheets::Authorization.authorize
+MedsTracker::GoogleSheets::Authorization.authorize
