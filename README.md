@@ -50,13 +50,15 @@ Both will start Sinatra listening on port `4567`.
 
 ## Using
 
-The primary purpose of this was to be used by iOS Shortcuts to easily trigger the application. You can find the shortcuts here:
+The primary purpose of this was to be used by iOS / macOS Shortcuts to easily trigger the application. You can find the shortcuts here:
 
-- Add taken: TBD
-- Start: TBD
-- End: TBD
+- Add taken: [https://www.icloud.com/shortcuts/627e808c222f47da87d73c374d4e8694](https://www.icloud.com/shortcuts/627e808c222f47da87d73c374d4e8694)
+- Start: [https://www.icloud.com/shortcuts/c692b6de3ec24946aa899e98e65ea7ed](https://www.icloud.com/shortcuts/c692b6de3ec24946aa899e98e65ea7ed)
+- End: [https://www.icloud.com/shortcuts/d145395575f44a5bb5856ec9a24ddba6](https://www.icloud.com/shortcuts/d145395575f44a5bb5856ec9a24ddba6)
 
-You can also POST to `/add_taken`, `/add_start`, and `/add_end` to record when the medication was taken, effects started, and effects ended.
+The shortcuts above will prompt you for where `meds_tracker` is running - you'll want to input it like `http://localhost:4567`, without an ending `/`.
+
+If you don't want to or can't use iOS / macOS Shortcuts, you can also POST to `/add_taken`, `/add_start`, and `/add_end` to record when the medication was taken, effects started, and effects ended.
 
 When `/add_end` is called, it will automatically add values in the `duration` column.
 
