@@ -25,6 +25,7 @@ Docker and local execution both will need to use an .env file. You'll want to cr
 - `GOOGLE_CREDS_PATH` - the path to the credentials file that you downloaded in the prerequisites section above. This should be somewhere in the current working directory.
 - `TOKEN_PATH` - a path to where the result of authenticating will be stored - this will be a YAML file. This should be somewhere in the current working directory.
 - `SHEET_ID` - the ID of the Google Sheet from the prerequisites section above
+- `TZ` - The time zone that you want to use when determining dates and times when writing to the spreadsheet (example, `TZ=America/Chicago`)
 
 ### Docker Compose
 
