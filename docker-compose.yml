@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  tracker:
+    build: .
+    ports: 
+      - "4567:4567"
+      - "5151:5151"
+    volumes:
+      - "./creds:/creds"
+    environment:
+      GOOGLE_CREDS_PATH: ${GOOGLE_CREDS_PATH}
+      TOKEN_PATH: ${TOKEN_PATH}
+      SHEET_ID: ${SHEET_ID}
+      TZ: ${TZ}
+
