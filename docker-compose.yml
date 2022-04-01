@@ -6,7 +6,7 @@ services:
     ports: 
       - "4567:4567"
     volumes:
-      - "./creds:/creds"
+      - ".:/app"
     environment:
       GOOGLE_CREDS_PATH: ${GOOGLE_CREDS_PATH}
       TOKEN_PATH: ${TOKEN_PATH}
@@ -17,7 +17,7 @@ services:
     ports:
       - "5151:5151"
     volumes:
-      - "./creds:/creds"
+      - ".:/app"
     environment:
       GOOGLE_CREDS_PATH: ${GOOGLE_CREDS_PATH}
       TOKEN_PATH: ${TOKEN_PATH}
