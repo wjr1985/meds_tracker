@@ -50,7 +50,7 @@ Once you have Docker or your local set up created, you'll want to authorize your
 
 For Docker Compose: `docker compose run authorize`
 
-For Docker: `docker run -ti meds_tracker:latest bundle exec ruby authorize.rb`, replacing `meds_tracker:latest` with the image 
+For Docker: `docker run --env-file .env -v ${PWD}/creds:/app/creds -ti meds_tracker:latest bundle exec ruby authorize.rb`, replacing `meds_tracker:latest` with the image 
 
 For running locally: `bundle exec ruby authorize.rb`
 
@@ -62,7 +62,7 @@ Once the authorization code receives the callback, it will automatically get the
 
 To start using Docker Compose, run `docker compose up`.
 
-To start using Docker, run: `docker run --env-file .env -v ./creds:./creds -p 4567:4567 meds_tracker:latest`, replacing `meds_tracker:latest` with the image name, and `creds` with the credentials directory. Alternatively, you could run:
+To start using Docker, run: `docker run --env-file .env -v ${PWD}/creds:/app/creds -p 4567:4567 meds_tracker:latest`, replacing `meds_tracker:latest` with the image name, and `creds` with the credentials directory. Alternatively, you could run:
 
 ```
 docker run \
