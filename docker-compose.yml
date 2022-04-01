@@ -5,6 +5,16 @@ services:
     build: .
     ports: 
       - "4567:4567"
+    volumes:
+      - "./creds:/creds"
+    environment:
+      GOOGLE_CREDS_PATH: ${GOOGLE_CREDS_PATH}
+      TOKEN_PATH: ${TOKEN_PATH}
+      SHEET_ID: ${SHEET_ID}
+      TZ: ${TZ}
+  authorize:
+    build: .
+    ports:
       - "5151:5151"
     volumes:
       - "./creds:/creds"
@@ -13,4 +23,7 @@ services:
       TOKEN_PATH: ${TOKEN_PATH}
       SHEET_ID: ${SHEET_ID}
       TZ: ${TZ}
+    command: ["bundle", "exec", "ruby", "authorize.rb"]
+    profiles: ["authorize"] 
+
 
