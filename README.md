@@ -4,23 +4,35 @@ This is a simple program that responds to HTTP requests by updating a Google Spr
 
 ## ⚠️ Work in progress
 
-This is very much so a work in progress. It works for me for my daily use, but could have some bugs still. Support for running in Docker is still coming.
+This is very much so a work in progress. It works for me for my daily use, but could have some bugs still.
 
 ## Prerequisites
 
-- Ruby 3.1.1
+- Ruby 3.1.1 OR Docker with `docker compose` or `docker-compose`
 - A Google Cloud project and OAuth credentials with that project. First, read the instructions [here](https://developers.google.com/workspace/guides/create-project) to create a Google Cloud project. Next, follow the instructions [here](https://developers.google.com/workspace/guides/create-credentials#desktop-app) on how to set up OAuth Client ID credentials for a Desktop app. Once created, you'll want to download the credentials file for use later on. Do **not** ever commit this or otherwise make it publicly avaialble.
 - A Google Sheet with headers already set up. The headers can be whatever you want, but the script will assume something like `date,taken,start,end,duration`.
 - The ID of the above Google sheet - if you're unsure of the ID for the Google Sheet, the ID is the part of the url between `/d/` and `/edit` (so in the following example https://docs.google.com/spreadsheets/d/abcdefghijklmnop/edit#gid=0, the ID would be `abcdefghijklmnop`)
-- Linux or MacOS if not running in Docker
+- Linux or MacOS if not running in Docker (this has not been tested in Windows)
 
 Important note: With your Google Cloud project, you'll want to go to the [OAuth consent screen](https://console.cloud.google.com/apis/credentials/consent) configuration and change `Publishing status` to production. You'll receive a warning or a notice about needing to verify your application - you can ignore this and continue. If using this for personal use, you'll receive a warning when authenticating later on indicating that the application isn't verified, but you can continue anyway. If you do not do this, your application authorization will only last for 7 days.
 
 ## Setup
 
+### .env file
+
+Docker and local execution both will need to use an .env file. You'll want to create an `.env` file with the following:
+
+- `GOOGLE_CREDS_PATH` - the path to the credentials file that you downloaded in the prerequisites section above. This should be somewhere in the current working directory.
+- `TOKEN_PATH` - a path to where the result of authenticating will be stored - this will be a YAML file. This should be somewhere in the current working directory.
+- `SHEET_ID` - the ID of the Google Sheet from the prerequisites section above
+
+### Docker Compose
+
+Docker Compose is supported.
+
 ### Docker
 
-TBD
+You'll want to run `docker build -t meds_tracker:latest .` to build the image. Note that in the .env file created above, `GOOGLE_CREDS_PATH` and `TOKEN_PATH` should specify a subdirectory (so something like `GOOGLE_CREDS_PATH=creds/credentials.json`).
 
 ### Setting up for running locally
 
@@ -36,7 +48,9 @@ Then, you'll want to create an `.env` file with the following:
 
 Once you have Docker or your local set up created, you'll want to authorize your user. To do this, run the following:
 
-For Docker: `TBD`
+For Docker Compose: `docker compose run authorize`
+
+For Docker: `docker run -ti meds_tracker:latest bundle exec ruby authorize.rb`, replacing `meds_tracker:latest` with the image 
 
 For running locally: `bundle exec ruby authorize.rb`
 
@@ -46,11 +60,23 @@ Once the authorization code receives the callback, it will automatically get the
 
 ## Starting
 
-To start using Docker, run `TBD`
+To start using Docker Compose, run `docker compose up`.
+
+To start using Docker, run: `docker run --env-file .env -v ./creds:./creds -p 4567:4567 meds_tracker:latest`, replacing `meds_tracker:latest` with the image name, and `creds` with the credentials directory. Alternatively, you could run:
+
+```
+docker run \
+  -e GOOGLE_CREDS_PATH=creds/credentials.json \
+  -e TOKEN_PATH=creds/token.yaml \
+  -e SHEET_ID=abcdefg1234567 \
+  -v ${PWD}/creds:/app/creds \
+  -p 4567:4567 \
+  meds_tracker:latest
+```
 
 To start running locally, run `bundle exec ruby main.rb`
 
-Both will start Sinatra listening on port `4567`.
+All of the above will start Sinatra listening on port `4567`.
 
 ## Using
 
@@ -71,7 +97,8 @@ When `/add_end` is called, it will automatically add values in the `duration` co
 
 These are in no specific order
 
-- [ ] Finish Docker setup
+- [x] Finish Docker setup
+- [ ] Publish Docker image
 - [x] Publish iOS Shortcuts
 - [ ] Handle when taken, start, or end crosses a date boundary (a.k.a. don't assume that all meds are taken, start, and end on the same day)
 - [ ] Allow customization of the columns used for date, taken, start, end, and duration
