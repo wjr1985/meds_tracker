@@ -109,7 +109,7 @@ These are in no specific order
 
 ## Contributing
 
-Want to contribute? Feel free to create a merge request [here](https://gitlab.com/wjr1985/meds_tracker/-/merge_requests), or report an issue [here](https://gitlab.com/wjr1985/meds_tracker/-/issues). If you contribute a merge request, you'll be listed in the README.
+Want to contribute? Feel free to create a pull request [here](https://github.com/wjr1985/meds_tracker/pulls), or report an issue [here](https://github.com/wjr1985/meds_tracker/issues). If you contribute a pull request, you'll be listed in the README.
 
 ## License
 
