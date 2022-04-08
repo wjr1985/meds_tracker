@@ -2,22 +2,15 @@ version: "3.9"
 
 services:
   tracker:
-    build: .
-    ports: 
-      - "4567:4567"
-    volumes:
-      - ".:/app"
+    image: "ghcr.io/wjr1985/meds_tracker:main"
     environment:
       GOOGLE_CREDS_PATH: ${GOOGLE_CREDS_PATH}
       TOKEN_PATH: ${TOKEN_PATH}
       SHEET_ID: ${SHEET_ID}
       TZ: ${TZ}
   authorize:
+    image: "ghcr.io/wjr1985/meds_tracker:main"
     build: .
-    ports:
-      - "5151:5151"
-    volumes:
-      - ".:/app"
     environment:
       GOOGLE_CREDS_PATH: ${GOOGLE_CREDS_PATH}
       TOKEN_PATH: ${TOKEN_PATH}

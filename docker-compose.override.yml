@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  tracker:
+    build: .
+    ports:
+      - "4567:4567"
+    volumes:
+      - ".:/app"
+  authorize:
+    build: .
+    volumes:
+      - ".:/app"
+    ports:
+      - "5151:5151"
