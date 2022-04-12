@@ -6,6 +6,7 @@ services:
       - "${MEDS_PORT:-4567}:4567"
     volumes:
       - "${MEDS_CREDS_PATH:./creds}:/app/creds"
+    restart: always
   authorize:
     ports:
       - "${MEDS_AUTHORIZE_PORT:-5151}:5151"
