@@ -8,7 +8,7 @@ This is very much so a work in progress. It works for me for my daily use, but c
 
 ## Prerequisites
 
-- Ruby 3.1.1 OR Docker
+- Ruby 3.1.x OR Docker
 - A Google Cloud project and OAuth credentials with that project. First, read the instructions [here](https://developers.google.com/workspace/guides/create-project) to create a Google Cloud project. Next, follow the instructions [here](https://developers.google.com/workspace/guides/create-credentials#desktop-app) on how to set up OAuth Client ID credentials for a Desktop app. Once created, you'll want to download the credentials file for use later on. Do **not** ever commit this or otherwise make it publicly avaialble.
 - A Google Sheet with headers already set up. The headers can be whatever you want, but the script will assume something like `date,taken,start,end,duration`.
 - The ID of the above Google sheet - if you're unsure of the ID for the Google Sheet, the ID is the part of the url between `/d/` and `/edit` (so in the following example https://docs.google.com/spreadsheets/d/abcdefghijklmnop/edit#gid=0, the ID would be `abcdefghijklmnop`)
